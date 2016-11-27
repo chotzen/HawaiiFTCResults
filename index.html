@@ -6,22 +6,26 @@
 
 </head>
 <body>
-  <form action="">
-    <input type="radio" name="sorted" value="yes" id="sort" > Sort Matches<br>
-    <input type="radio" name="sorted" value="no" checked id="dontsort"> Don't Sort Matches
-  </form>
+  <table id="options">
+    <tr>
+      <td>
+        <form action="">
+          <input type="radio" name="sorted" value="yes" id="sort" > Sort Matches<br>
+          <input type="radio" name="sorted" value="no" checked id="dontsort"> Don't Sort Matches
+        </form>
+      </td>
+      <td>
+        <form action="">
+          <input type="radio" name="sorted" value="yes" id="sortrank" > Sort by Ranking<br>
+          <input type="radio" name="sorted" value="no" checked id="sortnum"> Sort by Team #
+        </form>
+      </td>
+    </tr>
+  </table>
+  <br>
   <table id="results-table">
     <tr id="header">
 
-      <th>Team</th>
-      <th>Name</th>
-      <th>School</th>
-    </tr>
-  </table>
-  <br><br>
-  <table id="rankings">
-    <tr>
-      <th>#</th>
       <th>Team</th>
       <th>Name</th>
       <th>School</th>
@@ -29,6 +33,8 @@
       <th>RP</th>
     </tr>
   </table>
+  <br><br>
+
   <script type="text/javascript" src="resultsparser.js">
   </script>
 </body>

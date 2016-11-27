@@ -77,7 +77,7 @@ function parse() {
   })
 }
 
-function showResults(sorted) {
+function showResults(sorted, sortednum) {
   if (!init) {
     var headerRow = document.getElementById("header");
     for (var i = 1; i <= matchcount; i++) {
@@ -87,22 +87,37 @@ function showResults(sorted) {
     }
 
   }
+  var teamset;
+  if (sortednum) {
+    teamset = teams;
+  } else {
+    teamset = sortedteams;
+  }
   var table = document.getElementById("results-table");
-  for (var i = 0; i < teams.length; i++) {
+  for (var i = 0; i < teamset.length; i++) {
+
     var row = document.createElement("tr");
     var num = document.createElement("td"), name = document.createElement("td"), school = document.createElement("td");
-    num.innerHTML = teams[i].number;
-    name.innerHTML = teams[i].name;
-    school.innerHTML = teams[i].school;
+    num.innerHTML = teamset[i].number;
+    name.innerHTML = teamset[i].name;
+    school.innerHTML = teamset[i].school;
     row.appendChild(num);
     row.appendChild(name);
     row.appendChild(school);
 
+    var qp = document.createElement("td");
+    var rp = document.createElement("td");
+    qp.innerHTML = teamset[i].qp();
+    rp.innerHTML = teamset[i].rp();
+    row.appendChild(qp);
+    row.appendChild(rp);
+
+
     var list;
     if (sorted) {
-      list = teams[i].sortedmatches;
+      list = teamset[i].sortedmatches;
     } else {
-      list = teams[i].matches;
+      list = teamset[i].matches;
     }
     for (var m = 0; m < list.length; m++) {
       var s = document.createElement("td");
@@ -119,9 +134,6 @@ function showResults(sorted) {
     }
     table.appendChild(row);
   }
-  if (!init) {
-    showRankings();
-  }
   init = true;
 }
 
@@ -137,42 +149,13 @@ function clearTable() {
   }
 }
 
-function showRankings() {
-  for (var i = 0; i < sortedteams.length; i++) {
-    var row = document.createElement("tr");
-    var rank = document.createElement("td"), num = document.createElement("td"), name = document.createElement("td"), school = document.createElement("td");
-    rank.innerHTML = i + 1;
-    num.innerHTML = sortedteams[i].number;
-    name.innerHTML = sortedteams[i].name;
-    school.innerHTML = sortedteams[i].school;
-    row.appendChild(rank);
-    row.appendChild(num);
-    row.appendChild(name);
-    row.appendChild(school);
-
-    var qp = document.createElement("td");
-    var rp = document.createElement("td");
-    qp.innerHTML = sortedteams[i].qp();
-    rp.innerHTML = sortedteams[i].rp();
-    row.appendChild(qp);
-    row.appendChild(rp);
-    document.getElementById("rankings").appendChild(row);
-  }
-}
-
 
 parse();
-showResults(false);
+showResults(false, true);
 
 
 
-document.getElementById("dontsort").addEventListener('click', function() {
+document.addEventListener('click', function() {
   clearTable();
-  showResults(false);
-  console.log('hi')
-})
-
-document.getElementById("sort").addEventListener('click', function() {
-  clearTable();
-  showResults(true);
+  showResults(document.getElementById("sort").checked, document.getElementById("sortnum").checked);
 })
