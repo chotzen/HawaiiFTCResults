@@ -104,7 +104,9 @@ function showResults(sorted, sortednum) {
     row.appendChild(num);
     row.appendChild(name);
     row.appendChild(school);
-
+    var rank = document.createElement("td");
+    rank.innerHTML = sortedteams.indexOf(teamset[i]) + 1;
+    row.appendChild(rank);
     var qp = document.createElement("td");
     var rp = document.createElement("td");
     qp.innerHTML = teamset[i].qp();
