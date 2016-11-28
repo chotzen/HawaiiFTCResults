@@ -18,3 +18,7 @@ td.win {
 td.loss {
   background-color: rgb(150, 0, 0);
 }
+
+form {
+  text-align: left;
+}
