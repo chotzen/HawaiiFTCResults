@@ -123,6 +123,7 @@ function showResults(sorted, sortednum) {
     }
     for (var m = 0; m < list.length; m++) {
       var s = document.createElement("td");
+      //s.id = "match-" + m + "-" + i;
       s.innerHTML = "QP: " + list[m].qp + "<br>RP: " + list[m].rp;
       if (list[m].status === "W") {
         s.style.backgroundColor = "green";
@@ -130,6 +131,11 @@ function showResults(sorted, sortednum) {
         s.style.backgroundColor = "yellow";
       } else if (list[m].status === "L") {
         s.style.backgroundColor = "red";
+      }
+      if (sorted) {
+        if (m === 9) {
+          s.style.borderRight = "3px solid black";
+        }
       }
       s.class = "match";
       row.appendChild(s);
