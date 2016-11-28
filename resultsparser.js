@@ -97,6 +97,11 @@ function showResults(sorted, sortednum) {
   for (var i = 0; i < teamset.length; i++) {
 
     var row = document.createElement("tr");
+    if (!sortednum) {
+      if (i === 3) {
+        row.style.borderBottom = "3px solid black";
+      }
+    }
     var num = document.createElement("td"), name = document.createElement("td"), school = document.createElement("td");
     num.innerHTML = teamset[i].number;
     name.innerHTML = teamset[i].name;
@@ -126,11 +131,11 @@ function showResults(sorted, sortednum) {
       //s.id = "match-" + m + "-" + i;
       s.innerHTML = "QP: " + list[m].qp + "<br>RP: " + list[m].rp;
       if (list[m].status === "W") {
-        s.style.backgroundColor = "green";
+        s.className = "win"
       } else if (list[m].status === "T") {
-        s.style.backgroundColor = "yellow";
+        s.className = "tie"
       } else if (list[m].status === "L") {
-        s.style.backgroundColor = "red";
+        s.className = "loss"
       }
       if (sorted) {
         if (m === 9) {
